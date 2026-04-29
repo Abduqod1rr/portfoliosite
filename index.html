@@ -1,0 +1,225 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{--mono:'DM Mono',monospace;--display:'Syne',sans-serif}
+  body{font-family:var(--display);color:var(--color-text-primary);background:transparent;font-size:18px}
+  a{text-decoration:none;cursor:pointer}
+  .wrap{padding:0 2rem 4rem;max-width:900px;margin:0 auto}
+
+  .nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 0;margin-bottom:3rem;border-bottom:0.5px solid var(--color-border-tertiary)}
+  .nav-name{font-family:var(--mono);font-size:24px;font-weight:500;letter-spacing:0.04em}
+  .nav-right{display:flex;align-items:center;gap:2rem}
+  .nav-right a{font-size:20px;color:var(--color-text-secondary)}
+  .nav-right a:hover{color:var(--color-text-primary)}
+  .hire-badge{font-family:var(--mono);font-size:16px;padding:6px 16px;border-radius:20px;background:#EAF3DE;color:#3B6D11;display:flex;align-items:center;gap:6px}
+  .hire-dot{width:6px;height:6px;border-radius:50%;background:#639922;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+  .hero{text-align:center;padding:4rem 0 4.5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:4rem}
+  .hero h1{font-size:96px;font-weight:700;line-height:1.08;margin-bottom:1.5rem;letter-spacing:-0.03em}
+  .hero h1 em{font-style:normal;color:var(--color-text-secondary)}
+  .hero p{font-size:26px;color:var(--color-text-secondary);line-height:1.75;font-family:var(--mono);margin-bottom:2.5rem}
+  .hero-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:3rem}
+  .btn-dark{font-size:22px;padding:16px 40px;background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);cursor:pointer;font-family:var(--display);font-weight:600}
+  .btn-outline{font-size:22px;padding:16px 40px;background:transparent;color:var(--color-text-primary);border:0.5px solid var(--color-border-primary);border-radius:var(--border-radius-md);cursor:pointer;font-family:var(--display)}
+  .stats-row{display:flex;justify-content:center;gap:1px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+  .stat{flex:1;padding:2rem 1.5rem;text-align:center;background:var(--color-background-secondary)}
+  .stat+.stat{border-left:0.5px solid var(--color-border-tertiary)}
+  .stat-num{font-size:48px;font-weight:700;letter-spacing:-0.02em;margin-bottom:6px}
+  .stat-label{font-size:18px;color:var(--color-text-secondary);font-family:var(--mono)}
+
+  .sec-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2rem}
+  .sec-title{font-size:18px;font-family:var(--mono);color:var(--color-text-tertiary);letter-spacing:0.1em;text-transform:uppercase}
+  .sec-count{font-size:18px;font-family:var(--mono);color:var(--color-text-tertiary)}
+
+  .projects{margin-bottom:5rem}
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+  .project-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:2rem;display:flex;flex-direction:column;gap:14px;transition:border-color 0.15s}
+  .project-card:hover{border-color:var(--color-border-primary)}
+  .project-card-top{display:flex;justify-content:space-between;align-items:flex-start}
+  .project-icon{width:52px;height:52px;border-radius:10px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:center;font-size:24px}
+  .project-arrow{font-size:22px;color:var(--color-text-tertiary)}
+  .project-title{font-size:26px;font-weight:600;letter-spacing:-0.01em}
+  .project-desc{font-size:20px;color:var(--color-text-secondary);line-height:1.65;font-family:var(--mono)}
+  .tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .tag{font-family:var(--mono);font-size:14px;padding:4px 12px;border-radius:4px;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+
+  .stack{margin-bottom:5rem}
+  .stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .stack-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:1.5rem}
+  .stack-card-label{font-size:14px;font-family:var(--mono);color:var(--color-text-tertiary);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.08em}
+  .stack-items{display:flex;flex-direction:column;gap:10px}
+  .stack-item{display:flex;align-items:center;gap:10px;font-size:24px;font-weight:500}
+  .stack-dot{width:6px;height:6px;border-radius:50%;background:var(--color-text-tertiary);flex-shrink:0}
+  .stack-dot.green{background:#639922}
+  .stack-dot.blue{background:#185FA5}
+
+  .experience{margin-bottom:5rem}
+  .exp-card{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:2rem;border:0.5px solid var(--color-border-tertiary)}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.5rem}
+  .exp-title{font-size:28px;font-weight:600;margin-bottom:6px;letter-spacing:-0.01em}
+  .exp-company{font-size:18px;color:var(--color-text-secondary);font-family:var(--mono)}
+  .exp-date{font-family:var(--mono);font-size:14px;color:var(--color-text-tertiary);background:var(--color-background-primary);padding:6px 14px;border-radius:4px;border:0.5px solid var(--color-border-tertiary);white-space:nowrap}
+  .exp-divider{height:0.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+  .exp-points{display:flex;flex-direction:column;gap:12px}
+  .exp-point{display:flex;gap:12px;font-size:18px;color:var(--color-text-secondary);line-height:1.6;font-family:var(--mono)}
+  .exp-point-dot{color:var(--color-text-tertiary);flex-shrink:0}
+
+  .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .contact-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:1.5rem 1.75rem}
+  .contact-label{font-size:14px;font-family:var(--mono);color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}
+  .contact-value{font-size:20px;font-weight:500}
+
+  .footer{margin-top:4rem;padding-top:2rem;border-top:0.5px solid var(--color-border-tertiary);display:flex;justify-content:space-between;align-items:center}
+  .footer-text{font-size:16px;font-family:var(--mono);color:var(--color-text-tertiary)}
+</style>
+
+<div class="wrap">
+
+  <nav class="nav">
+    <span class="nav-name">Abduqodir.Raxmonov</span>
+    <div class="nav-right">
+      <a href="https://github.com/Abduqod1rr">GitHub</a>
+      <a href="https://www.linkedin.com/in/abduqodir-ben-raxmonov-morgan-a3146a380/">LinkedIn</a>
+      <a href="#">Resume</a>
+      <span class="hire-badge"><span class="hire-dot"></span>open to work</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Full-stack<br><em>Python</em><br>Developer.</h1>
+    <p>Building products end-to-end — APIs, databases, interfaces.<br>Based in Tashkent · remote-first.</p>
+    <div class="hero-actions">
+      <button class="btn-dark">View projects</button>
+      <button class="btn-outline">Get in touch</button>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><div class="stat-num">0.5+</div><div class="stat-label">years coding</div></div>
+      <div class="stat"><div class="stat-num">1</div><div class="stat-label">startup shipped</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">solid projects built</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">coffee consumed</div></div>
+    </div>
+  </section>
+
+  <section class="projects">
+    <div class="sec-head">
+      <span class="sec-title">Projects</span>
+      <span class="sec-count">03</span>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-icon"></div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div class="project-title">Startup App</div>
+        <div class="project-desc"><a href="https://verai-m2oy.onrender.com/">VerAi</a> Fake News
+Detector. Paste a news headline or article. AI instantly analyzes it against trusted official sources on the internet.</div>
+        <div class="tag-row"><span class="tag">Django</span><span class="tag">React</span><span class="tag">PostgreSQL</span><span class="tag">Docker</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-icon"></div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div class="project-title">Project </div>
+        <div class="project-desc"><a href="Abduqod1rr/Hoots
+">Hoots</a> — social media, but you speak your mind instead of typing it.</div>
+        <div class="tag-row"><span class="tag">FastAPI</span><span class="tag">Python</span><span class="tag"</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-card-top">
+          <div class="project-icon"></div>
+          <span class="project-arrow">↗</span>
+        </div>
+        <div class="project-title">Project </div>
+        <div class="project-desc"><a href="https://github.com/Abduqod1rr/codespace">CodeSpace</a>  at that time github was litte compllicated so I decided to create my own tool to work with team</div>
+        <div class="tag-row"><span class="tag">Python</span><span class="tag">Docker</span><span class="tag"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="stack">
+    <div class="sec-head">
+      <span class="sec-title">Stack</span>
+    </div>
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-label">Backend</div>
+        <div class="stack-items">
+          <div class="stack-item"><span class="stack-dot green"></span>Python</div>
+          <div class="stack-item"><span class="stack-dot green"></span>Django</div>
+          <div class="stack-item"><span class="stack-dot green"></span>FastAPI</div>
+          <div class="stack-item"><span class="stack-dot green"></span>PostgreSQL</div>
+        </div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-label">Infra & Tools</div>
+        <div class="stack-items">
+          <div class="stack-item"><span class="stack-dot green"></span>Linux</div>
+          <div class="stack-item"><span class="stack-dot green"></span>Docker</div>
+          <div class="stack-item"><span class="stack-dot green"></span>Git</div>
+          
+        </div>
+      </div>
+      <div class="stack-card">
+      <div class="stack-card-label">Learning</div>
+        <div class="stack-items">
+          <div class="stack-item"><span class="stack-dot blue"></span>networking</div>
+           <div class="stack-item"><span class="stack-dot blue"></span>cloud</div>
+          <!-- <div class="stack-item"><span class="stack-dot blue"></span>Kubernetes</div>
+        </div>
+      </div>
+    </div>-->
+  </section>
+
+  <section class="experience">
+    <div class="sec-head">
+      <span class="sec-title">Experience</span>
+    </div>
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-title">Full-stack Developer</div>
+          <div class="exp-company"></div>
+        </div>
+        <span class="exp-date">2024 – present</span>
+      </div>
+      <div class="exp-divider"></div>
+      <div class="exp-points">
+        <div class="exp-point"><span class="exp-point-dot">→</span>Built and deployed a full-stack web application end-to-end from scratch (verAI)</div>
+        <div class="exp-point"><span class="exp-point-dot">→</span>Designed REST API and database schema, handled auth and user management (egalik.uz backend)</div>
+        
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <span class="sec-title">Contact</span>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="ttheonepersonn@gmail.com">Gmail</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">GitHub</div>
+        <div class="contact-value"><a href="https://github.com/Abduqod1rr">Abduqod1rr</a></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label" herf="https://www.linkedin.com/in/abduqodir-ben-raxmonov-morgan-a3146a380/">LinkedIn</div>
+        <div class="contact-value"><a href="https://www.linkedin.com/in/abduqodir-ben-raxmonov-morgan-a3146a380/">abduqodir</a></div>
+      </div>
+      <div class="contact-card"><!--
+        <div class="contact-label">Location</div>
+      <div class="contact-value"> remote ok</div>-->
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-text">Raxmonov Abduqodir (ben morgan) · 2026</span>
+    <span class="footer-text">built with care ✦</span>
+  </footer>
+
+</div>
